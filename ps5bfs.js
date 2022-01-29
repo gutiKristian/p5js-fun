@@ -116,6 +116,7 @@ class Point {
           fill(80);
           break;
         default:
+          fill(255, 204, 0);
           break;  
       }      
     }
@@ -160,6 +161,13 @@ class BFS {
         
         if (n[i] == this.e) {
           this.isFound = true;
+          // path found -> backtrack the points and show them on the grid
+          let node = this.e;
+          while (node != null) {
+            // whatever except WHITE=0,GRAY=1,BLACK=2, we could have also created SHOW_PATH=3 and extend the swtich
+            node.visitedStatus = -1;
+            node = node.p;
+          }
           return;
         }
 
