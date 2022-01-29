@@ -6,7 +6,7 @@ const GRAY=1; // reachable - not yet searched
 const BLACK=2; // reachable from initial point and already searched
 
 let p_manager, bfs;
-
+let started=false;
 
 class PointManager {
   constructor(columns = 20, rows = 20) {
@@ -170,6 +170,7 @@ class BFS {
     current.visitedStatus = BLACK;
 
   }
+
 }
  
 function mouseDragged(event) {
@@ -181,11 +182,16 @@ function setup() {
   createCanvas(WIDTH, HEIGHT);
   p_manager = new PointManager();
   bfs = new BFS(p_manager, {x: 0, y: 0}, {x: 19, y: 19});
-}
 
+  button = createButton('Run BFS');
+  button.position(HEIGHT + 10, 0);
+  button.mousePressed(() => {started=true;});
+
+}
 
 function draw() {
   background(255);
   p_manager.show();
-  bfs.step();
+  if (started)
+    bfs.step();
 }
