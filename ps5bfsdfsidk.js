@@ -150,12 +150,7 @@ class BFS {
     // instead of running and showing result we must step the running phase
     
     let current = this.queue.shift();
-    console.log("CURRENT:");
-    console.log(current);
     let n = this.pMan.findNeighbours(current);
-    
-    console.log("NEIGHBOURS:")
-    console.log(n);
     
     for (let i = 0; i < n.length; i++) {
       if (n[i].visitedStatus == WHITE) {
