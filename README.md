@@ -1,2 +1,4 @@
 # p5js-fun
-I do this when I am bored
+I have decided to learn p5js.
+I do this when I am bored.
+
