@@ -8,23 +8,31 @@ const BLACK=2; // reachable from initial point and already searched
 let p_manager, bfs;
 let started=false;
 
-class PointManager {
+export class PointManager {
   constructor(columns = 20, rows = 20) {
     this.cols = columns;
     this.rows = rows;
-    this.points = this.initPoints(WIDTH / this.cols, HEIGHT / this.rows);
+    this.w = WIDTH / this.cols;
+    this.h = HEIGHT / this.rows;
+    this.points = this.initPoints();
     this.reset = false; // might be used to reset already visited nodes
     // in other words, delete the barrier
   }
   
-  initPoints(w, h) {
+  createPoint(x, y) {
+    // new Point(..,.., w, h) each Point holds this, mby we should jsut pass a reference to an object that holds infos that is same for every point 
+    // global var would do it aswell..
+    return new Point(x * this.w, y * this.h, this.w, this.h);
+  }
+
+  initPoints() {
     // w- width of point, h- height..
     let arr = new Array(this.rows);
     for (let y = 0; y < this.rows; y++) {
         arr[y] = new Array(this.cols);
         for (let x = 0; x < this.cols; x++) {
           // x * w -> shift the point so they don't overlap, same for y
-          arr[y][x] = new Point(x * w, y * h, w, h);
+          arr[y][x] = this.createPoint(x, y);
         }
     }
     return arr;
@@ -86,7 +94,7 @@ class PointManager {
   
 }
 
-class Point {
+export class Point {
   constructor(x, y, height, width) {
     // p5js properties
     this.x = x;
