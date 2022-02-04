@@ -35,16 +35,17 @@ class Snake {
     // we should also consider checking the coords so we won't spawn apple in snake
   }
 
-  collisionDet(head) {
+  collisionDet() {
     // directopm 0,0 will squeeze the snake, multiple rects in one point
-    if (this.body.includes(head)) {
-      this.direction = {x: 0, y: 0};
-      return;
+    for (let i = 1; i < this.body.length; i++) {
+      if (this.body[i].x == this.body[0].x && this.body[i].y == this.body[0].y) {
+        this.direction = {x: 0, y: 0};
+        console.log("GAME OVER");
+        return;
+      }
     }
-
-    if (head.x == this.apple.x && head.y == this.apple.y)
-      this.eat();
-    
+    if (this.body[0].x == this.apple.x && this.body[0].y == this.apple.y)
+      this.eat();   
   }
 
   move() {
@@ -69,12 +70,8 @@ class Snake {
       this.body[i] = this.body[i - 1];
     }
 
-    let coords = {x: new_x, y: new_y}
-
-    this.collisionDet(coords);
-
-    this.body[0] = coords;
-
+    this.body[0] = {x: new_x, y: new_y};
+    this.collisionDet();
   }
   
   
