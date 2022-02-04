@@ -10,20 +10,29 @@ class Snake {
     this.speed = 1;
     this.body = [{x: WIDTH/2, y: HEIGHT/2}];
     this.spawn = 0;
+    this.apple = {x: 20, y: 20}; // then generated randomly
   }
   
   draw() {
+    // snake
     for (let i = 0; i < this.body.length; i++) {
       fill(255);
       stroke(0);
       rect(this.body[i].x, this.body[i].y, grd, grd);
     }
+    // apple
+    fill(255,0,0);
+    stroke(0);
+    rect(this.apple.x, this.apple.y, grd, grd);
   }
 
   eat() {
     // after an apple has been eaten we spawn cell on the tail, give it the coordinates of the
-    // last one, therefore it is spawn in the next frame -> in tne move section
+    // last one, therefore it is spawn in the next frame -> in tne move section aaand generate new apple
     this.spawn += 1;
+    this.apple.x = Math.floor(Math.random() * grd) * grd;
+    this.apple.y = Math.floor(Math.random() * grd) * grd;
+    // we should also consider checking the coords so we won't spawn apple in snake
   }
 
   collisionDet(head) {
@@ -32,6 +41,10 @@ class Snake {
       this.direction = {x: 0, y: 0};
       return;
     }
+
+    if (head.x == this.apple.x && head.y == this.apple.y)
+      this.eat();
+    
   }
 
   move() {
