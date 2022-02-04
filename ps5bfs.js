@@ -8,7 +8,7 @@ const BLACK=2; // reachable from initial point and already searched
 let p_manager, bfs;
 let started=false;
 
-export class PointManager {
+class PointManager {
   constructor(columns = 20, rows = 20) {
     this.cols = columns;
     this.rows = rows;
@@ -94,7 +94,7 @@ export class PointManager {
   
 }
 
-export class Point {
+class Point {
   constructor(x, y, height, width) {
     // p5js properties
     this.x = x;
