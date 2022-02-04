@@ -81,7 +81,7 @@ function keyPressed() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(WIDTH, HEIGHT);
   snake = new Snake();
   frameRate(15);
 }
