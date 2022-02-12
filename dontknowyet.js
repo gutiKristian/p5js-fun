@@ -31,6 +31,15 @@ function draw() {
       fill(255);
     circle(points[i].x, points[i].y, 25);
   }
+
+  // we want to connect these circles and thus draw vertices with shape (noFill)
+  // draw points
+  noFill();
+  beginShape();
+  for (let i=0; i < points.length; i++) {
+    vertex(points[i].x, points[i].y);
+  }
+  endShape()
 }
 
 
