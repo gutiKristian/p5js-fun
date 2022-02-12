@@ -16,16 +16,31 @@ function setup() {
 
 function draw() {
   background(220);
-  fill(255);
   for (let i=0; i < points.length; i++) {
+    if (i === selectedPoint)
+      fill(255, 0, 0);
+    else
+      fill(255);
     circle(points[i].x, points[i].y, 25);
   }
+}
+
+
+function isInCircle(coords) {
+  // is my click inside the circle ?
+  // (x - x0)^2 + (y - y0)^2 = r^2
+  // sqrt((x - x0)^2 + (y - y0)^2)) <= r
+  return Math.sqrt(Math.pow(mouseX - coords.x, 2) + Math.pow(mouseY - coords.y, 2)) <= d/2;
 }
 
 
 // this function fires after the mouse has been
 // clicked anywhere
 function mouseClicked() {
-  console.log(mouseX);
-  console.log(mouseY);
+  for (let i=0; i < points.length; i++) {
+    if (isInCircle(points[i])) {
+      selectedPoint = selectedPoint == -1 ? i : -1;
+      return;
+    }
+  }
 }
