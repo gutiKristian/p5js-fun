@@ -16,6 +16,14 @@ function setup() {
 
 function draw() {
   background(220);
+
+  // move selected point
+  if (selectedPoint != -1) {
+    points[selectedPoint].x = mouseX;
+    points[selectedPoint].y = mouseY;
+  }
+
+  // draw points
   for (let i=0; i < points.length; i++) {
     if (i === selectedPoint)
       fill(255, 0, 0);
