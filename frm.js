@@ -98,7 +98,7 @@ function mouseClicked(event) {
   
 }
 
-
+// FIRST SEMINAR
 function giftWrapping() {
   H = [];
   points.sort((a, b) => b.y - a.y);
@@ -136,6 +136,20 @@ function giftWrapping() {
   }
 
   return H;
+}
+
+
+// SECOND SEMINAR
+function grahamScan() {
+	points.sort(function(a, b) {
+		if (a.x === b.x) {
+			return a.y - b.y;
+		}
+		return a.x - b.x;
+	});
+	// Find pivot q, the most right point q_x
+	var q = points[0];
+	console.log(prettyPrintVectors(points));
 }
 
 function prettyPrintVectors(vecArray) {
