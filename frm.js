@@ -8,8 +8,8 @@ let numOfPoints = 0;  // number of random points
 let points = [];
 
 // Canvas size
-let canvasHeight = 600;
-let canvasWidth = 500;
+let canvasHeight = 500;
+let canvasWidth = 800;
 let d = 20;
 
 // none -> -1 else in range [0, numOfPoints -1]
@@ -40,6 +40,10 @@ function draw() {
     else
       fill(255);
     circle(points[i].x, points[i].y, 10);
+
+	fill(0);
+	textSize(20);
+	text(i + 1 + "[" + points[i].x + ", " + points[i].y + "]", points[i].x - 30, points[i].y + 25);
   }
 
   // we want to connect these circles and thus draw vertices with shape     (noFill)
@@ -141,15 +145,64 @@ function giftWrapping() {
 
 // SECOND SEMINAR
 function grahamScan() {
+	points.sort((a, b) => a.x - b.x);
+	// Find pivot q, the most right point q_x
+	let q = points[0];
 	points.sort(function(a, b) {
 		if (a.x === b.x) {
 			return a.y - b.y;
 		}
 		return a.x - b.x;
 	});
-	// Find pivot q, the most right point q_x
-	var q = points[0];
-	console.log(prettyPrintVectors(points));
+	
+	let stack = [];
+
+	stack.push(points[0]);
+	stack.push(points[1]);
+	stack.push(points[2]);
+	for (let i = 3; i < points.length + 1; ++i) {
+
+		while (true) {
+			
+			let first = stack[stack.length - 3];
+			console.log("FIRST: ", points.indexOf(first) + 1);
+			let second = stack[stack.length - 2];
+			console.log("SECOND: ", points.indexOf(second) + 1);
+			let third = stack[stack.length - 1];
+			console.log("THIRD: ", points.indexOf(third) + 1);
+
+			let res = ((second.x - first.x) * (third.y - first.y)) - 
+			((second.y - first.y) * (second.x - first.x));
+
+			console.log("RES: ", res);
+
+			if (res < 0) {
+				break;
+			} else {
+				let p1 = stack.pop();
+				console.log("POP: ", points.indexOf(p1) + 1);
+				let p2 = stack.pop();
+				console.log("POP: ", points.indexOf(p2) + 1);
+				stack.push(third);
+				console.log("WHILE PUSH: ", points.indexOf(third) + 1);
+			}
+
+			if (stack.length == 2)
+				break;
+
+		}
+
+		if (i < points.length) {
+			stack.push(points[i]);
+			console.log("PUSH: ", i + 1);
+		}
+		
+	}
+
+	stack.push(points[0]);
+
+	return stack;
+
 }
 
 function prettyPrintVectors(vecArray) {
@@ -163,7 +216,8 @@ function prettyPrintVectors(vecArray) {
 function keyPressed() {
   if (keyCode == 67) {
     // c
-    LINES_RES = giftWrapping();
+    // LINES_RES = giftWrapping();
+	LINES_RES = grahamScan();
     //prettyPrintVectors(LINES_RES);
     //console.log("POINTS");
     //prettyPrintVectors(points);
