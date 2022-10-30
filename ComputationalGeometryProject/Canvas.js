@@ -1,17 +1,26 @@
+import {config} from './config.js';
+
+// TODO:    Generating random points
+//          Wrap p5JS funcs ?
+//          Config file ?
+
 export class Canvas {
+
     /**
      * Canvas where it all happens.
+     * Parameters are initialized with values from config file, but you may override in the constructor
      * @param {Number} height 
      * @param {Number} width 
      */
-    constructor(height, width) {
+    constructor(height = config.canvas.height, width = config.canvas.width) {
       this.height = height;
       this.width = width;
       this.points = []; // Array<Point>
       // None is clicked by default, otherwise it is equal to an index from the points array
       this.clickedPoint = -1;
     }
-  
+    
+
     /**
      * Add basic point to the canvas
      * @param {p5.Vector} coords Vec2, poistion of mouse click

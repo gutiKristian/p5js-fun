@@ -1,3 +1,5 @@
+import { config } from "./config.js";
+
 export class Point {
     /**
      * Class for representing point. Either placed by user or auto-generated.
@@ -7,7 +9,7 @@ export class Point {
      * @param {[Number, Number, Number]} color color for of the point
      * @param {[Number, Number, Number]} selectedColor when point is clicked
      */
-    constructor(x, y, d = 10, color = [255, 255, 255] , selectedColor = [255, 255, 0]) {
+    constructor(x, y, d = 10, color = config.point.defaultColor , selectedColor = config.point.selectedColor) {
   
       if (color.length != 3) {
         throw new Error("Color is of type [Number, Number, Number]");

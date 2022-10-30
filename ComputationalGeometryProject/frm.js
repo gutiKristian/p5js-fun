@@ -1,6 +1,7 @@
 import {Point} from './Point.js';
 import {Canvas} from './Canvas.js';
 
+
 let LINES_RES = [];
 
 // Number of initial points
