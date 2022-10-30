@@ -30,7 +30,15 @@ class Point {
 
   get isSelected() {
     return this.isSelected;
-  }  
+  }
+
+  set X(x) {
+    this.x = x;
+  }
+
+  set Y(y) {
+    this.y = y;
+  }
    
   click() {
     this.isSelected = !this.isSelected;
@@ -55,6 +63,8 @@ class Canvas {
     this.height = height;
     this.width = width;
     this.points = []; // Array<Point>
+    // None is clicked by default, otherwise it is equal to an index from the points array
+    this.clickedPoint = -1;
   }
 
   /**
@@ -67,10 +77,19 @@ class Canvas {
   }
 
   hasClickedPoint() {
-    // check if point has been clicked
-    // mark it -- so rendering shows this point (selectedColor)
-    // update this point pos based on mouse pos
-    // another point cannot be clicked when one is already clicked
+    
+    for (let i=0; i < this.points.length; ++i) {
+      // TODO: isInCircle to Canvas class
+      if (isInCircle(this.points[i])) {
+        // Toggle
+        selectedPoint = selectedPoint == -1 ? i : -1;
+        this.points[i].click();
+        return;
+      }
+    }
+
+    // If left click was not registered on point, we add a new point instead of selecting existing
+    this.addPoint(createVector(mouseX, mouseY));
   }
 
 
@@ -78,6 +97,14 @@ class Canvas {
    * Method called every frame
    */
   update() {
+
+    if (this.clickedPoint != -1) {
+      // mouseX and mouseY are global variables provided by p5JS
+      this.points[this.clickedPoint].X = mouseX
+      this.points[this.clickedPoint].Y = mouseY;
+    }
+
+
   }
 }
 
