@@ -4,20 +4,6 @@ let canvas;
 // TODO: Inside individual Task
 let LINES_RES = [];
 
-// Number of initial points, TODO: Inside canvas
-let numOfPoints = 0;  // number of random points
-
-// Initial points
-let points = [];
-
-// Canvas size
-let canvasHeight = 500;
-let canvasWidth = 800;
-let d = 20;
-
-// none -> -1 else in range [0, numOfPoints -1]
-let selectedPoint = -1;
-
 // P5JS functions
 
 function setup() {
@@ -35,27 +21,6 @@ function draw() {
 
   canvas.update();
 
-  // // move selected point
-  // if (selectedPoint != -1) {
-  //   points[selectedPoint].x = mouseX;
-  //   points[selectedPoint].y = mouseY;
-  // }
-
-  // // draw points
-  // for (let i=0; i < points.length; i++) {
-  //   if (LINES_RES.includes(points[i]))
-  //     fill(0, 255, 0);
-  //   else if (i === selectedPoint)
-  //     fill(255, 0, 0);
-  //   else
-  //     fill(255);
-  //   circle(points[i].x, points[i].y, 10);
-
-	// fill(0);
-	// textSize(20);
-	// text(i + 1 + "[" + points[i].x + ", " + points[i].y + "]", points[i].x - 30, points[i].y + 25);
-//  }
-
   // we want to connect these circles and thus draw vertices with shape     (noFill)
   // draw points
   noFill();
@@ -68,14 +33,6 @@ function draw() {
 }
 
 
-function isInCircle(coords) {
-  // is my click inside the circle ?
-  // (x - x0)^2 + (y - y0)^2 = r^2
-  // sqrt((x - x0)^2 + (y - y0)^2)) <= r
-  return Math.sqrt(Math.pow(mouseX - coords.x, 2) + Math.pow(mouseY - coords.y, 2)) <= d/2;
-}
-
-
 // this function fires after the mouse has been
 // clicked anywhere
 function mouseClicked(event) {
@@ -85,26 +42,13 @@ function mouseClicked(event) {
   if(event.altKey) {
     canvas.leftClickAltAction(coords);   
   } else if(event.shiftKey) {
-    selectedPoint = -1;
-    points = [];
+    canvas.leftClickShiftAction();
   } else {
     canvas.leftClickAction(coords);
-    // console.log("LEFT");
-    // let clicked_point = false;
-    // for (let i=0; i < points.length; i++) {
-    //   if (isInCircle(points[i])) {
-    //     selectedPoint = selectedPoint == -1 ? i : -1;
-    //     clicked_point = true;
-    //     break;
-    //   }
-    // }
-  
-    // if (!clicked_point) {
-    //   points.push(createVector(mouseX, mouseY));
-    // }
   }
   
 }
+
 
 // FIRST SEMINAR
 function giftWrapping() {
