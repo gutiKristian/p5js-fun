@@ -31,10 +31,6 @@ class Point {
       this.isSelected = false;
     }
   
-    get isSelected() {
-      return this.isSelected;
-    }
-  
     set X(x) {
       this.x = x;
     }
@@ -43,7 +39,7 @@ class Point {
       this.y = y;
     }
      
-    click() {
+    toggle() {
       this.isSelected = !this.isSelected;
     }
   

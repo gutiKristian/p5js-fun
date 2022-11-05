@@ -62,10 +62,9 @@ class Canvas {
         this.addPoint(createVector(mouseX, mouseY));
         return;
       }
-    
-      this.selectedPoint = this.selectedPoint == -1 ? index : -1; // Toggle
-      point.click();
-    
+      
+      this.points[index].toggle();
+      this.clickedPoint = this.clickedPoint == -1 ? index : -1; // Toggle
     }
 
     leftClickAltAction(coords) {
@@ -103,7 +102,7 @@ class Canvas {
      * @returns index of a clicked point or -1 if no point has been clicked
      */
      #hasClickedPoint(coords) {
-      for (const [index, point] of this.points) {
+      for (const [index, point] of this.points.entries()) {
         if (point.isInPoint(coords)) {
           return index;
         }

@@ -88,7 +88,7 @@ function mouseClicked(event) {
     selectedPoint = -1;
     points = [];
   } else {
-    canvas.leftClickAction();
+    canvas.leftClickAction(coords);
     // console.log("LEFT");
     // let clicked_point = false;
     // for (let i=0; i < points.length; i++) {
