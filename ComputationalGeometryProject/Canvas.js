@@ -62,6 +62,11 @@ export class Canvas {
         this.points[this.clickedPoint].X = mouseX
         this.points[this.clickedPoint].Y = mouseY;
       }
+      
+      for (const point of this.points) {
+          point.draw();
+      }
+
     }
 
     // Private methods
