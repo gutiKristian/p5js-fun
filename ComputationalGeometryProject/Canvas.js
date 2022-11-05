@@ -31,12 +31,13 @@ export class Canvas {
     }
   
     /**
+     * TODO: Action class where we define these actions ?
      * Traverse all points and check whether the click was
      * inside one of them. Not the most optimal solution
      * but for now it is sufficient.
      * @returns void
      */
-    hasClickedPoint() {
+    leftClickAction() {
 
       for (const [index, point] of this.points) {
         if (this.#isInCircle(point)) {
