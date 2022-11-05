@@ -75,7 +75,11 @@ class Canvas {
       
       this.deletePoint(index);
     }
-  
+    
+    leftClickShiftAction() {
+      this.points = [];
+      this.clickedPoint = -1;
+    }
   
     /**
      * Method called every frame
