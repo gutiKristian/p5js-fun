@@ -7,7 +7,8 @@ export const config = {
 
     point: {
         defaultColor: [255, 255, 255],
-        selectedColor: [255, 255, 0]
+        selectedColor: [255, 255, 0],
+        diameter: 10
     }
 
 }

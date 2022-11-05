@@ -9,7 +9,8 @@ export class Point {
      * @param {[Number, Number, Number]} color color for of the point
      * @param {[Number, Number, Number]} selectedColor when point is clicked
      */
-    constructor(x, y, d = 10, color = config.point.defaultColor , selectedColor = config.point.selectedColor) {
+    constructor(x, y, d = config.point.diameter, color = config.point.defaultColor ,
+      selectedColor = config.point.selectedColor) {
   
       if (color.length != 3) {
         throw new Error("Color is of type [Number, Number, Number]");
