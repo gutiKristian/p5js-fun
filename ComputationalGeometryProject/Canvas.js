@@ -48,6 +48,7 @@ export class Canvas {
       
       this.points.splice(index, 1);
     }
+
   
     /**
      * TODO: Action class where we define these actions ?
@@ -56,19 +57,28 @@ export class Canvas {
      * but for now it is sufficient.
      * @returns void
      */
-    leftClickAction() {
-
-      for (const [index, point] of this.points) {
-        if (this.#isInCircle(point)) {
-          this.selectedPoint = this.selectedPoint == -1 ? index : -1;
-          point.click();
-          return;
-        }
+    leftClickAction(coords) {
+      let index = this.#hasClickedPoint(coords);
+      
+      if (index == -1) {
+        // If left click was not registered on point, we add a new point instead of selecting existing
+        this.addPoint(createVector(mouseX, mouseY));
+        return;
       }
+    
+      this.selectedPoint = this.selectedPoint == -1 ? index : -1; // Toggle
+      point.click();
+    
+    }
 
-      // If left click was not registered on point, we add a new point instead of selecting existing
-      this.addPoint(createVector(mouseX, mouseY));
-    }  
+    leftClickAltAction(coords) {
+      let index = this.#hasClickedPoint(coords);
+      if (index == -1) {
+        return;
+      }
+      
+      this.deletePoint(index)
+    }
   
   
     /**
@@ -90,9 +100,18 @@ export class Canvas {
 
     // Private methods
 
-    #isInCircle(coords) {
-      // (x - x0)^2 + (y - y0)^2 = r^2
-      // sqrt((x - x0)^2 + (y - y0)^2)) <= r
-      return Math.sqrt(Math.pow(mouseX - coords.x, 2) + Math.pow(mouseY - coords.y, 2)) <= d/2;
+    /**
+     * Simple checker.
+     * @param {p5.Vector} coordinates  mouseX and mouseY when click happened 
+     * @returns index of a clicked point or -1 if no point has been clicked
+     */
+     #hasClickedPoint(coords) {
+      for (const [index, point] of this.points) {
+        if (point.isInPoint(coords)) {
+          return index;
+        }
+      }
+      return - 1;
     }
+
   }

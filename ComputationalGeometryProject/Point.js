@@ -54,4 +54,11 @@ export class Point {
         fill(this.color[0], this.color[1], this.color[2]);
       circle(this.x, this.y, this.d);
     }
+
+    isInPoint(coords) {
+      // (x - x0)^2 + (y - y0)^2 = r^2
+      // sqrt((x - x0)^2 + (y - y0)^2)) <= r
+      return Math.sqrt(Math.pow(coords.x - this.x, 2) + Math.pow(coords.y - this.y, 2)) <= d/2;
+    }
+
   }
