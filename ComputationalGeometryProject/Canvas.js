@@ -8,16 +8,23 @@ export class Canvas {
 
     /**
      * Canvas where it all happens.
-     * Parameters are initialized with values from config file, but you may override in the constructor
      * @param {Number} height 
      * @param {Number} width 
      */
-    constructor(height = config.canvas.height, width = config.canvas.width) {
-      this.height = height;
-      this.width = width;
+    constructor() {
+      this.height =  config.canvas.height;
+      this.width = config.canvas.width;
       this.points = []; // Array<Point>
       // None is clicked by default, otherwise it is equal to an index from the points array
       this.clickedPoint = -1;
+      
+      // for now here
+      let d = config.point.diameter;
+      
+      for (let i=0; i < config.canvas.numOfrandomPoints; i++) {
+        this.addPoint(createVector(random(this.width - d), random(this.height - d)));
+      }
+
     }
     
 
