@@ -36,6 +36,18 @@ export class Canvas {
       let p = new Point(coords.x, coords.y)
       this.points.push(p)
     }
+
+    /**
+     * Delete point from points array
+     * @param {Number} index 
+     */
+    deletePoint(index) {
+      if (index < 0 || index >= this.points.length) {
+        console.log("Invalid index, note we are indexing from 0");
+      }
+      
+      this.points.splice(index, 1);
+    }
   
     /**
      * TODO: Action class where we define these actions ?
