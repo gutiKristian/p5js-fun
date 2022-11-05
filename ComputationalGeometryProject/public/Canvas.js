@@ -73,7 +73,7 @@ class Canvas {
         return;
       }
       
-      this.deletePoint(index)
+      this.deletePoint(index);
     }
   
   
