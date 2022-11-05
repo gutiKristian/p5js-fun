@@ -1,7 +1,6 @@
 // TODO:    Generating random points
 //          Wrap p5JS funcs ?
 //          Config file ?
-
 class Canvas {
 
     /**

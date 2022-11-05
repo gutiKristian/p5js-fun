@@ -1,11 +1,3 @@
-// import {Point} from './Point.js';
-// import {Canvas} from './Canvas.js';
-// import { config } from './config.js';
-
-// const Point = require('Point.js');
-// const Canvas = require('Canvas.js');
-// const config = require('config.js');
-
 // GLOBALS
 let canvas;
 
