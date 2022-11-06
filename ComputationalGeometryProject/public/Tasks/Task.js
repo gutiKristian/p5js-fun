@@ -2,7 +2,7 @@
 class Task {
     constructor() {
       // callbacks
-      // what vars
+      this.result = [];
     }
   
     compute(canvas) {
@@ -17,5 +17,6 @@ class Task {
         Custom show method for each task.
         Display the result of the computation.
       */
+      throw new Error("Not implemented!");
     }
   }
