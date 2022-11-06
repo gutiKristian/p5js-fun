@@ -5,9 +5,12 @@ class Seminar1Task extends Task {
     }
 
     compute(canvas) {
+
+      let loopCounter = 0;
+
       console.log("Starting computation...");
       let H = [];
-      let points = [...canvas.points];
+      let points = canvas.points;
 
       console.log("Points in computation: ", points.length);
 
@@ -17,7 +20,7 @@ class Seminar1Task extends Task {
       console.log("Points canvas:", canvas.points);
       // convex hull algorithm
       let pj =  points[0].Vector;
-      let pj_1 = createVector(pj.x + 10, pj.x);
+      let pj_1 = createVector(pj.x + 10, pj.y);
       
       H.push(pj);
   
@@ -25,7 +28,7 @@ class Seminar1Task extends Task {
       let currentAngle = Infinity;
       let currentPoint = null;
       while (H[0] != currentPoint) {
-        
+        ++loopCounter;
         currentAngle = Infinity;
         for (let i = 0; i < points.length; i++) {
             if (points[i].Vector == pj)
@@ -46,6 +49,18 @@ class Seminar1Task extends Task {
         pj_1 = pj;
         pj = currentPoint;
         H.push(currentPoint); // Pushing only vectors !! Good for now
+
+        if (loopCounter > points.length * 3) {
+          console.log("Something went wrong");
+          console.log("Convex Hull");
+          console.log(H);
+          console.log("PJ");
+          console.log(pj);
+          console.log("PJ_1");
+          console.log(pj_1);
+          return;
+        }
+
       }
     
       this.result = H;

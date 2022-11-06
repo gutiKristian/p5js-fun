@@ -2,14 +2,10 @@
 let canvas;
 let task = null;
 
-// TODO: Inside individual Task
-let LINES_RES = [];
-
 // P5JS functions
 
 function setup() {
 
-  let d = config.point.diameter;
   let width = config.canvas.width;
   let height = config.canvas.height;
 

@@ -1,8 +1,8 @@
 const config = {
     
     canvas: {
-        width: 800,
-        height: 600,
+        width: 1500,
+        height: 690,
         numOfrandomPoints: 0
     },
 

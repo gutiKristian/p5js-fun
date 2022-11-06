@@ -88,12 +88,12 @@ class Canvas {
   
       if (this.clickedPoint != -1) {
         // mouseX and mouseY are global variables provided by p5JS
-        this.points[this.clickedPoint].X = mouseX
-        this.points[this.clickedPoint].Y = mouseY;
+        this.points[this.clickedPoint].x = mouseX
+        this.points[this.clickedPoint].y = mouseY;
       }
       
-      for (const point of this.points) {
-          point.draw();
+      for (let i=0; i < this.points.length; ++i) {
+          this.points[i].draw(i);
       }
 
     }

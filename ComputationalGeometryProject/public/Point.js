@@ -39,11 +39,11 @@ class Point {
     }
 
     get x() {
-      this.vector.x;
+      return this.vector.x;
     }
 
     get y() {
-      this.vector.y;
+      return this.vector.y;
     }
 
     get Vector() {
@@ -54,18 +54,23 @@ class Point {
       this.isSelected = !this.isSelected;
     }
   
-    draw() {
+    draw(i) {
       if (this.isSelected)
         fill(this.selectedColor[0], this.selectedColor[1], this.selectedColor[2]);
       else
         fill(this.color[0], this.color[1], this.color[2]);
       circle(this.vector.x, this.vector.y, this.d);
+      
+      fill(0);
+	    textSize(20);
+	    text(i + 1 + "[" + this.vector.x + ", " + this.vector.y + "]",
+      this.vector.x - 30, this.vector.y + 25);
     }
 
     isInPoint(coords) {
       // (x - x0)^2 + (y - y0)^2 = r^2
       // sqrt((x - x0)^2 + (y - y0)^2)) <= r
-      return Math.sqrt(Math.pow(coords.x - this.x, 2) + Math.pow(coords.y - this.y, 2)) <= config.point.diameter/2;
+      return Math.sqrt(Math.pow(coords.x - this.vector.x, 2) + Math.pow(coords.y - this.vector.y, 2)) <= config.point.diameter/2;
     }
 
   }
