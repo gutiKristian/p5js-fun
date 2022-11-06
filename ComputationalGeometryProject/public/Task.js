@@ -7,7 +7,7 @@ class Task {
   
     compute(canvas) {
       /*
-        Accepts canvas, which contains set of points upon the calculation will be done.
+        Accepts canvas, which contains set of points and upon the calculation will be done.
       */
       throw new Error("Not implemented!");
     }
