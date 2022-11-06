@@ -3,6 +3,7 @@ class Task {
     constructor() {
       // callbacks
       this.result = [];
+      this.isDone = false;
     }
   
     compute(canvas) {

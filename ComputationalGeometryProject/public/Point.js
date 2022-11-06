@@ -22,21 +22,32 @@ class Point {
       
       // x and y coordinates are set wtihin mousclick callback from p5js this
       // always come from the canvas boundaries
-  
-      this.x = x;
-      this.y = y;
+      this.vector = createVector(x, y);
       this.d = d;
       this.color = color;
       this.selectedColor = selectedColor;
       this.isSelected = false;
     }
   
-    set X(x) {
-      this.x = x;
+    set x(x) {
+      this.vector.x = x;
+      
     }
   
-    set Y(y) {
-      this.y = y;
+    set y(y) {
+      this.vector.y = y;
+    }
+
+    get x() {
+      this.vector.x;
+    }
+
+    get y() {
+      this.vector.y;
+    }
+
+    get Vector() {
+      return this.vector;
     }
      
     toggle() {
@@ -48,7 +59,7 @@ class Point {
         fill(this.selectedColor[0], this.selectedColor[1], this.selectedColor[2]);
       else
         fill(this.color[0], this.color[1], this.color[2]);
-      circle(this.x, this.y, this.d);
+      circle(this.vector.x, this.vector.y, this.d);
     }
 
     isInPoint(coords) {

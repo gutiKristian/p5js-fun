@@ -1,5 +1,6 @@
 // GLOBALS
 let canvas;
+let task = null;
 
 // TODO: Inside individual Task
 let LINES_RES = [];
@@ -20,15 +21,18 @@ function draw() {
   background(220);
 
   canvas.update();
+  if (task && task.isDone) {
+    task.show();
+  }
 
   // we want to connect these circles and thus draw vertices with shape     (noFill)
   // draw points
-  noFill();
-  beginShape();
-  for (let i=0; i < LINES_RES.length; i++) {
-    vertex(LINES_RES[i].x, LINES_RES[i].y);
-  }
-  endShape()
+  // noFill();
+  // beginShape();
+  // for (let i=0; i < LINES_RES.length; i++) {
+  //   vertex(LINES_RES[i].x, LINES_RES[i].y);
+  // }
+  // endShape()
   
 }
 
@@ -47,47 +51,6 @@ function mouseClicked(event) {
     canvas.leftClickAction(coords);
   }
   
-}
-
-
-// FIRST SEMINAR
-function giftWrapping() {
-  H = [];
-  points.sort((a, b) => b.y - a.y);
-  // convex hull algorithm
-  pj =  points[0];
-  pj_1 = createVector(pj.x + 10, pj.y);
-  
-  H.push(pj);
-
-  let minAngleIndex = -1;
-  let currentAngle = Infinity;
-  let currentPoint = null;
-  while (H[0] != currentPoint) {
-    
-    currentAngle = Infinity;
-    for (let i = 0; i < points.length; i++) {
-        if (points[i] == pj)
-            continue;
-        
-        let a = p5.Vector.sub(pj_1, pj);
-        let b = p5.Vector.sub(points[i], pj);
-        let angle = degrees(a.angleBetween(b));
-
-        if (angle < currentAngle) {
-            currentAngle = angle;
-            minAngleIndex = i;
-        }
-    }
-    
-    
-    currentPoint = points[minAngleIndex];
-    pj_1 = pj;
-    pj = currentPoint;
-    H.push(currentPoint);
-  }
-
-  return H;
 }
 
 
@@ -162,14 +125,25 @@ function prettyPrintVectors(vecArray) {
 }
 
 function keyPressed() {
-  if (keyCode == 67) {
-    // c
-    // LINES_RES = giftWrapping();
-	LINES_RES = grahamScan();
-    //prettyPrintVectors(LINES_RES);
-    //console.log("POINTS");
-    //prettyPrintVectors(points);
+  
+  switch(keyCode) {
+    case 67:
+      task = new Seminar1Task();
+      task.compute(canvas);
+      break;
+    default:
+      console.log("Unknown Command");
+      break;
   }
+
+  // if (keyCode == 67) {
+  //   // c
+  //   // LINES_RES = giftWrapping();
+	// LINES_RES = grahamScan();
+  //   //prettyPrintVectors(LINES_RES);
+  //   //console.log("POINTS");
+  //   //prettyPrintVectors(points);
+  // }
 }
 
 
