@@ -77,7 +77,7 @@ function grahamScan() {
 			console.log("SECOND: ", points.indexOf(second) + 1);
 			let third = stack[stack.length - 1];
 			console.log("THIRD: ", points.indexOf(third) + 1);
-
+      // determinant
 			let res = ((second.x - first.x) * (third.y - first.y)) - 
 			((second.y - first.y) * (second.x - first.x));
 
