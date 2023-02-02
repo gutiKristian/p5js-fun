@@ -4,6 +4,7 @@ class Task {
       // callbacks
       this.result = [];
       this.isDone = false;
+      this.taskNumber = -1;
     }
   
     compute(canvas) {

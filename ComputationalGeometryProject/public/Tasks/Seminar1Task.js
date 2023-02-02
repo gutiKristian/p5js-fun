@@ -1,6 +1,7 @@
 class Seminar1Task extends Task {
     constructor() {
       super();
+      this.taskNumber = 1;
       console.log("Task 1, Convex Hull");
     }
 

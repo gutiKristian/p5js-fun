@@ -1,7 +1,8 @@
-class Seminar1Task extends Task {
+class Seminar3Task extends Task {
     constructor() {
       super();
-      console.log("Task 1, Convex Hull");
+      this.taskNumber = 3;
+      console.log("Task 3, Triangulation");
     }
 
     compute(canvas) {
