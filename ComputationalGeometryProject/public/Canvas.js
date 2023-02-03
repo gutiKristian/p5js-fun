@@ -85,6 +85,8 @@ class Canvas {
      * Method called every frame
      */
     update() {
+
+      //* TODO: Option to connect points as they were added to the screen
   
       if (this.clickedPoint != -1) {
         // mouseX and mouseY are global variables provided by p5JS
