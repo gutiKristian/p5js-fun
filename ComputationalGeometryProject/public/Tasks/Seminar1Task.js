@@ -15,7 +15,7 @@ class Seminar1Task extends Task {
 
       console.log("Points in computation: ", points.length);
 
-      points.sort((a, b) => b.y - a.y);
+      points.sort((a, b) => a.y - b.y);
 
       console.log("Points local:", points);
       console.log("Points canvas:", canvas.points);

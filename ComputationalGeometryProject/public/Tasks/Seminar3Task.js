@@ -2,6 +2,7 @@ class Seminar3Task extends Task {
     constructor() {
       super();
       this.taskNumber = 3;
+      this.points = null;
       console.log("Task 3, Triangulation");
       console.log("Result is list of tuples, where each tuple represents edge, eg. from tuple[0] to tuple[1].");
     }
@@ -10,6 +11,9 @@ class Seminar3Task extends Task {
 
       if (canvas.points.length <= 3)
         return;
+
+      // For input from convex hull we must do something else :)))))))))))
+      this.points = canvas.points.map((p) => p.Vector);
 
       //! WE ARE WORKING WITH MONOTONE POLYGON !
       //! If we want algorithm for non-monotone we would have to implement procedure
@@ -103,10 +107,6 @@ class Seminar3Task extends Task {
       const LEFT = points[min_x_index].path;
       const RIGHT = LEFT == 1 ? 2 : 1;
 
-      console.log("LEFT: ", LEFT);
-      console.log("RIGHT: ", RIGHT);
-      console.log(points);
-
       // Stack contains already traversed points, which were not yet triangulated
       // push, pop
       let stack = []
@@ -146,7 +146,7 @@ class Seminar3Task extends Task {
           for (let j = 0; j < stack.length; ++j)
           {
             let p = stack.pop();
-            this.result.push([points.i, p]);           
+            this.result.push([points[i], p]);           
           }
           stack.push(top);
           stack.push(points[i]);
@@ -154,20 +154,30 @@ class Seminar3Task extends Task {
 
       }
 
+      
       console.log("DONE");
+      this.isDone = true;
       console.log(this.result);
     }
 
     show() {
+      // noFill();
+      // beginShape();
+      // for (let i=0; i < this.result.length; i++) {
+      //   for (let j=0; j < 2; ++j)
+      //   {
+      //     vertex(this.result[i][j].x, this.result[i][j].y);
+      //   }
+      // }
+      // endShape();
+
       noFill();
       beginShape();
-      for (let i=0; i < this.result.length; i++) {
-        for (let j=0; j < 2; ++j)
-        {
-          vertex(this.result[i][j].x, this.result[i][j].y);
-        }
+      for (let i=0; i < this.points.length; i++) {
+        vertex(this.points[i].x, this.points[i].y);
       }
-      endShape()
+      endShape(CLOSE);
+
     }
 }
   
