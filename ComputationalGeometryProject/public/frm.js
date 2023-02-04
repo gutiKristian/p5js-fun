@@ -135,6 +135,10 @@ function keyPressed() {
       task = new Seminar4Task();
       task.compute(canvas);
       break;
+    case 68: // d
+      task = new Seminar5Task();
+      task.compute(canvas);
+      break;
     default:
       console.log("Unknown Command");
       break;
