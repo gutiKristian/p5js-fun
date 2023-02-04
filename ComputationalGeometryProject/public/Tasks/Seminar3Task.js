@@ -130,9 +130,13 @@ class Seminar3Task extends Task {
             let v = p5.Vector.sub(p.Vector, points[i].Vector);
             let det = u.x * v.y - u.y * v.x;
 
-            if (det > 0)
+            if ((det > 0 && p.path == RIGHT) || (det < 0 && p.path == LEFT))
             {
               this.result.push([points[i], p]);
+            } 
+            else
+            {
+              stack.push(p);
             }
 
           }
@@ -161,15 +165,15 @@ class Seminar3Task extends Task {
     }
 
     show() {
-      // noFill();
-      // beginShape();
-      // for (let i=0; i < this.result.length; i++) {
-      //   for (let j=0; j < 2; ++j)
-      //   {
-      //     vertex(this.result[i][j].x, this.result[i][j].y);
-      //   }
-      // }
-      // endShape();
+      noFill();
+      beginShape();
+      for (let i=0; i < this.result.length; i++) {
+        for (let j=0; j < 2; ++j)
+        {
+          vertex(this.result[i][j].x, this.result[i][j].y);
+        }
+      }
+      endShape();
 
       noFill();
       beginShape();
