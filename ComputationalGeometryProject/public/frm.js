@@ -127,6 +127,10 @@ function keyPressed() {
       task = new Seminar1Task();
       task.compute(canvas);
       break;
+    case 84:
+      task = new Seminar3Task();
+      task.compute(canvas);
+      break;
     default:
       console.log("Unknown Command");
       break;
