@@ -123,12 +123,16 @@ function prettyPrintVectors(vecArray) {
 function keyPressed() {
   
   switch(keyCode) {
-    case 67:
+    case 67: // c
       task = new Seminar1Task();
       task.compute(canvas);
       break;
-    case 84:
+    case 84: // t
       task = new Seminar3Task();
+      task.compute(canvas);
+      break;
+    case 79: // o
+      task = new Seminar4Task();
       task.compute(canvas);
       break;
     default:
