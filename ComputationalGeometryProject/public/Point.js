@@ -55,6 +55,10 @@ class Point {
     toggle() {
       this.isSelected = !this.isSelected;
     }
+
+    hasSameCoordinates(point) {
+      return (point.x == this.vector.x && point.y == this.vector.y);
+    }
   
     draw(i) {
       if (this.isSelected)
