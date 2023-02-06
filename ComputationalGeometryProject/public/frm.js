@@ -127,9 +127,13 @@ function keyPressed() {
       task = new Seminar1Task();
       task.compute(canvas);
       break;
+    case 71: // g
+      task = new Seminar2Task();
+      task.compute(canvas);
+      break;
     case 84: // t
       let H = null;
-      if (task != null && task.taskNumber == 1) {
+      if (task != null && task.taskNumber == 1 || task.taskNumber == 2) {
         H = task.result;
       }
       task = new Seminar3Task(H);
