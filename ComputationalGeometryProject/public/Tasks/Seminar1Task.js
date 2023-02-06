@@ -50,18 +50,7 @@ class Seminar1Task extends Task {
         pj_1 = pj;
         pj = currentPoint;
         H.push(currentPoint); // Pushing only vectors !! Good for now
-
-        if (loopCounter > points.length * 3) {
-          console.log("Something went wrong");
-          console.log("Convex Hull");
-          console.log(H);
-          console.log("PJ");
-          console.log(pj);
-          console.log("PJ_1");
-          console.log(pj_1);
-          return;
-        }
-
+        
       }
     
       this.result = H;

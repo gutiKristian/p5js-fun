@@ -1,8 +1,8 @@
 class Seminar3Task extends Task {
-    constructor() {
+    constructor(H) {
       super();
       this.taskNumber = 3;
-      this.points = null;
+      this.points = H;
       console.log("Task 3, Triangulation");
       console.log("Result is list of tuples, where each tuple represents edge, eg. from tuple[0] to tuple[1].");
     }
@@ -16,9 +16,18 @@ class Seminar3Task extends Task {
       if (canvas.points.length <= 3)
         return;
 
-      // For input from convex hull we must do something else :)))))))))))
+      if (this.points != null) {
+        this.points.pop();
+        // I just overwrite, didn't come up with any nicer solution
+        let newPts = [];
+        for (const p of this.points) {
+          newPts.push(new Point(p.x, p.y));
+        }
+        canvas.points = newPts;
+      }
+      
       this.points = canvas.points.map((p) => p.Vector);
-
+      
       //! WE ARE WORKING WITH MONOTONE POLYGON !
       //! If we want algorithm for non-monotone we would have to implement procedure
       //! that transforms non-monotone to monotone hence deleteing split and merge vertices from such polygon
@@ -160,7 +169,7 @@ class Seminar3Task extends Task {
       for (let i=0; i < this.result.length; i++) {
         line(this.result[i][0].x, this.result[i][0].y, this.result[i][1].x, this.result[i][1].y);
       }
-      
+
       noFill();
       beginShape();
       for (let i=0; i < this.points.length; i++) {

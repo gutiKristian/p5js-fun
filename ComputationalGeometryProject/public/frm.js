@@ -128,7 +128,11 @@ function keyPressed() {
       task.compute(canvas);
       break;
     case 84: // t
-      task = new Seminar3Task();
+      let H = null;
+      if (task != null && task.taskNumber == 1) {
+        H = task.result;
+      }
+      task = new Seminar3Task(H);
       task.compute(canvas);
       break;
     case 79: // o
