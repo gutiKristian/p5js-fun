@@ -7,6 +7,10 @@ class Seminar3Task extends Task {
       console.log("Result is list of tuples, where each tuple represents edge, eg. from tuple[0] to tuple[1].");
     }
 
+    isCorrectLine(p1, p2, p3) {
+      return ((p2.x - p1.x) * (p3.y - p1.y)) - ((p2.y - p1.y) * (p3.x - p1.x)) >= 0;
+    }
+
     compute(canvas) {
 
       if (canvas.points.length <= 3)
@@ -119,27 +123,14 @@ class Seminar3Task extends Task {
       {
         let stackTop = stack.at(-1);
         
-        if (stackTop.path == 0 || stackTop.path ==  points[i].path)
+        if (stackTop.path ==  points[i].path)
         {
           // Same path
-          for (let j = 0; j < stack.length; ++j)
-          {
-            let p = stack.pop();
-            
-            let u = p5.Vector.sub(points[i-1].Vector, points[i].Vector)
-            let v = p5.Vector.sub(p.Vector, points[i].Vector);
-            let det = u.x * v.y - u.y * v.x;
-
-            if ((det > 0 && p.path == RIGHT) || (det < 0 && p.path == LEFT))
-            {
-              this.result.push([points[i], p]);
-            } 
-            else
-            {
-              stack.push(p);
-            }
-
+          while (stack.length >= 2 && this.isCorrectLine(stack.at(-2), stack.at(-1), points[i]) == (points[i].path == RIGHT)) {
+            this.result.push([points[i], stack.at(-2)]);
+            stack.pop();
           }
+
           stack.push(points[i]);
 
         }
@@ -147,12 +138,12 @@ class Seminar3Task extends Task {
         {
           let top = stack.at(-1);
           // Other path
-          for (let j = 0; j < stack.length; ++j)
-          {
+          while (stack.length > 0) {
             let p = stack.pop();
-            this.result.push([points[i], p]);           
+            this.result.push([points[i], p]);  
           }
-          stack.push(top);
+
+          // stack.push(top);
           stack.push(points[i]);
         }
 
@@ -165,16 +156,11 @@ class Seminar3Task extends Task {
     }
 
     show() {
-      noFill();
-      beginShape();
-      for (let i=0; i < this.result.length; i++) {
-        for (let j=0; j < 2; ++j)
-        {
-          vertex(this.result[i][j].x, this.result[i][j].y);
-        }
-      }
-      endShape();
 
+      for (let i=0; i < this.result.length; i++) {
+        line(this.result[i][0].x, this.result[i][0].y, this.result[i][1].x, this.result[i][1].y);
+      }
+      
       noFill();
       beginShape();
       for (let i=0; i < this.points.length; i++) {
