@@ -69,7 +69,7 @@ class Seminar6Task extends Task {
       return (c > 0) ? +1 : ((c < 0) ? -1 : 0);
     }
 
-    outGoingEdges(circle, edges, triangle) {
+    outGoingEdges(circle, edges, triangle, allTriangles) {
 
       // 0 - 1, 0 - 2,  1 - 2, ////1 - 1
 
@@ -85,26 +85,63 @@ class Seminar6Task extends Task {
           // Outer edge
           let bisector = p5.Vector.add(p1.Vector, p2.Vector).div(2);
           let vv;
+          let dir;
+
           if (this.isCenterInside(triangle[0].Vector, triangle[1].Vector, triangle[2].Vector, circle[0])) {
+            dir = circle[0];
             vv = p5.Vector.sub(bisector, circle[0]);
           } else {
-
-            let ee = [p1, p2];
-            if (p1.x > p2.x) {
-                ee = [p2, p1];
-            }
-
-            if (this.isAboveEdge(ee, circle[0]) === -1) {
-              vv = p5.Vector.sub(bisector, circle[0]);
-            } else {
-              vv = p5.Vector.sub(circle[0], bisector);
-            }
+            dir = bisector;
+            let isInAnother = false;
+              for (const tr of allTriangles) {
+                if (this.isCenterInside(tr[0].Vector, tr[1].Vector, tr[2].Vector, circle[0])) {
+                    isInAnother = true;
+                    break;
+                }
+              }
+              if (isInAnother) {
+                  dir = circle[0];
+                  vv = p5.Vector.sub(bisector, circle[0]);
+              } else {
+                  dir = circle[0];
+                  vv = p5.Vector.sub(circle[0], bisector);
+              }
           }
 
-          vv.mult(1000);
+          vv.x *= 9999; // We scale direction
+          vv.y *= 9999; // We scale direction
 
-          edges.push([circle[0], p5.Vector.add(circle[0], vv)]);
+          const newEdge = [dir, p5.Vector.add(dir, vv)];
+          edges.push(newEdge);
 
+
+          // let vv;
+          // if (this.isCenterInside(triangle[0].Vector, triangle[1].Vector, triangle[2].Vector, circle[0])) {
+          //   vv = p5.Vector.sub(bisector, circle[0]);
+          // } else {
+
+          //   vv = p5.Vector.sub(circle[0], bisector);
+
+          //   let ee = [p1, p2];
+          //   if (p1.x > p2.x) {
+          //       ee = [p2, p1];
+          //   }
+
+          //   if (this.isAboveEdge(ee, circle[0]) === -1) {
+          //     vv = p5.Vector.sub(bisector, circle[0]);
+          //   } else {
+          //     vv = p5.Vector.sub(circle[0], bisector);
+          //   }
+
+          // }
+          
+          
+
+          // vv.mult(1000);
+
+          // edges.push([circle[0], p5.Vector.add(circle[0], vv)]);
+          
+          //?
           // let v1 = p5.Vector.sub(circle[0], bisector); // (center - bisector) + center
           // let v2 = p5.Vector.sub(bisector, circle[0]); // (bisector - center) + center
 
@@ -132,7 +169,7 @@ class Seminar6Task extends Task {
           }
         }
         pts.push(center);
-        this.outGoingEdges([center, radius], edgs, this.triangles[i]);
+        this.outGoingEdges([center, radius], edgs, this.triangles[i], this.triangles);
       }
       
       this.resultEdges = edgs;
