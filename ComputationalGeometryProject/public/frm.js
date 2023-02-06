@@ -21,6 +21,23 @@ function draw() {
     task.show();
   }
 
+  /* 
+  KEYS
+  */
+  fill(0, 0, 0);
+  textSize(12);
+  text("Tasks", 10, 10);
+  text("c - Task1 - Convex Hull", 10, 22);
+  text("g - Task2 - Convex Hull Graham Scan", 10, 34);
+  text("t - Task3 - Triangulation Sweep Line", 10, 46);
+  text("o - Task4 - kDTree", 10, 58);
+  text("d - Task5 - Delaunay triangulation", 10, 70);
+  text("d - Task6 - Voronoi diagram", 10, 82);
+  text("Canvas controls", 10, 94);
+  text("r - to generate random points", 10, 106);
+  text("Left click generate point, click on point to move", 10, 118);
+  text("Shift + Left click to reset scene, Alt + Left click to delete point", 10, 130);
+
   // we want to connect these circles and thus draw vertices with shape     (noFill)
   // draw points
   // noFill();
