@@ -70,8 +70,8 @@ class Point {
       circle(this.vector.x, this.vector.y, this.d);
       
       fill(0);
-	    textSize(20);
-	    text(i + 1 + "[" + this.vector.x + ", " + this.vector.y + "]",
+	    textSize(config.canvas.textSize);
+	    text(i + 1 + "[" + Math.round(this.vector.x) + ", " + Math.round(this.vector.y) + "]",
       this.vector.x - 30, this.vector.y + 25);
     }
 

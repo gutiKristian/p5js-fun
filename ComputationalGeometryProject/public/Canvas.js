@@ -14,16 +14,18 @@ class Canvas {
       this.points = []; // Array<Point>
       // None is clicked by default, otherwise it is equal to an index from the points array
       this.clickedPoint = -1;
+      this.d = config.point.diameter;
       
-      // for now here
-      let d = config.point.diameter;
-      
-      for (let i=0; i < config.canvas.numOfrandomPoints; i++) {
-        this.addPoint(createVector(random(this.width - d), random(this.height - d)));
-      }
+      this.generateRandomPoints();
 
     }
     
+
+    generateRandomPoints() {
+      for (let i = 0; i < config.canvas.numOfrandomPoints; i++) {
+        this.addPoint(createVector(random(this.width - this.d), random(this.height - this.d)));
+      }
+    }
 
     /**
      * Add basic point to the canvas
@@ -54,6 +56,7 @@ class Canvas {
      * but for now it is sufficient.
      * @returns void
      */
+    //! Add point
     leftClickAction(coords) {
       let index = this.#hasClickedPoint(coords);
       
@@ -67,6 +70,7 @@ class Canvas {
       this.clickedPoint = this.clickedPoint == -1 ? index : -1; // Toggle
     }
 
+    //! Delete point
     leftClickAltAction(coords) {
       let index = this.#hasClickedPoint(coords);
       if (index == -1) {
@@ -76,17 +80,17 @@ class Canvas {
       this.deletePoint(index);
     }
     
+    //! Erase all points
     leftClickShiftAction() {
       this.points = [];
       this.clickedPoint = -1;
+      task = null;
     }
   
     /**
      * Method called every frame
      */
     update() {
-
-      //* TODO: Option to connect points as they were added to the screen
   
       if (this.clickedPoint != -1) {
         // mouseX and mouseY are global variables provided by p5JS
