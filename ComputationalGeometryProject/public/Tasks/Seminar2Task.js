@@ -8,16 +8,24 @@ class Seminar2Task extends Task {
 
     compute(canvas) {
       let points = canvas.points;
-      points.sort((a, b) => a.x - b.x);
+      points.sort((a, b) => b.x - a.x);
 
       // Find pivot q, the most right point q_x
       let q = points[0];
-      
+
+      let vec = p5.Vector.sub(createVector(q.x, q.y + 20), q.Vector);
+
+      for (let i = 0; i < points.length; ++i) {
+        let tempVec = p5.Vector.sub(points[i].Vector, q.Vector);
+        points[i].angle = vec.angleBetween(tempVec);
+        points[i].distanceToQ = dist(q.Vector, points[i].Vector);
+      }
+
       points.sort(function(a, b) {
-        if (a.y == b.y) {
-            return a.x - b.x;
+        if (a.angle == b.angle) {
+          return b.distanceToQ - a.distanceToQ;
         }
-        return a.y - b.y;
+        return b.angle - a.angle;
       });
       
       let stack = [];
@@ -37,7 +45,7 @@ class Seminar2Task extends Task {
           console.log("THIRD: ", points.indexOf(third) + 1);
           // determinant
           let res = ((second.x - first.x) * (third.y - first.y)) - 
-          ((second.y - first.y) * (second.x - first.x));
+          ((second.y - first.y) * (third.x - first.x));
 
           console.log("RES: ", res);
 
@@ -65,7 +73,6 @@ class Seminar2Task extends Task {
       }
 
       stack.push(points[0]);
-
 
       this.result = stack;
       this.isDone = true;

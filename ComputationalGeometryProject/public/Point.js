@@ -29,6 +29,8 @@ class Point {
       this.isSelected = false;
       // Used in seminar3, 0 - top and bottom, 1,2 left or right doesn't matter (left, right is a thing of pov)
       this.path = -1; 
+      this.angle = 0;
+      this.distanceToQ = -1;
     }
   
     set x(x) {
