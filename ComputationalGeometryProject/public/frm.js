@@ -1,7 +1,7 @@
 // GLOBALS
 let canvas;
 let task = null;
-
+let subtask = null;
 // P5JS functions
 
 function setup() {
@@ -140,7 +140,9 @@ function keyPressed() {
       task.compute(canvas);
       break;
     case 86: // v
-      task = new Seminar6Task();
+      subtask = new Seminar5Task();
+      subtask.compute(canvas);
+      task = new Seminar6Task(subtask);
       task.compute(canvas);
       break;
     default:

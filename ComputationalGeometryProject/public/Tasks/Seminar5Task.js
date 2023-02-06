@@ -2,6 +2,8 @@ class Seminar5Task extends Task {
     constructor() {
       super();
       this.taskNumber = 5;
+      this.outEdges = [];
+      this.triangles = [];
       this.points = null;
       console.log("Task 5, Delaunay triangulation");
     }
@@ -116,11 +118,14 @@ class Seminar5Task extends Task {
       if (closestToEdge == null) {
         e = this.#swapOrientation(e);
         closestToEdge = this.dp(e, points);
+        this.outEdges.push(e);
       }
 
       this.addToAEL(e, AEL, DT);
       this.addToAEL([e[1], closestToEdge], AEL, DT);
       this.addToAEL([closestToEdge, e[0]], AEL, DT);
+
+      this.triangles.push([p, min_dist_p, closestToEdge]);
 
       let closest_p = null;
       while (AEL.length > 0) {
@@ -136,8 +141,9 @@ class Seminar5Task extends Task {
         if (closest_p != null) {
           this.addToAEL([_e[1], closest_p], AEL, DT);
           this.addToAEL([closest_p, _e[0]], AEL, DT);
+          this.triangles.push([_e[0], _e[1], closest_p]);
         } else {
-
+          this.outEdges.push(_e);
         }
 
         DT.push(_e);
