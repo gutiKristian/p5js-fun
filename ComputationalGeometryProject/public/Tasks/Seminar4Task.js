@@ -45,27 +45,21 @@ class Seminar4Task extends Task {
 
     drawTree(node, x_min, x_max, y_min, y_max) {
 
+      // if leaf -- return -- leaves are drawn by canvas
       if (node.point != null)
         return;
 
       if (node.depth % 2 == 0) {
         // constant y
         line(x_min, node.vector.y, x_max, node.vector.y);
-
-        if (node.point == null) {
-          this.drawTree(node.left, x_min, x_max, y_min, node.vector.y);
-          this.drawTree(node.right, x_min, x_max, node.vector.y, y_max);
-        }
+        this.drawTree(node.left, x_min, x_max, y_min, node.vector.y);
+        this.drawTree(node.right, x_min, x_max, node.vector.y, y_max);
 
       } else {
         // constant x
         line(node.vector.x, y_min, node.vector.x, y_max);
-
-        if (node.point == null) {
-          this.drawTree(node.left, x_min, node.vector.x, y_min, y_max);
-          this.drawTree(node.right, node.vector.x, x_max, y_min, y_max);
-        }
-        
+        this.drawTree(node.left, x_min, node.vector.x, y_min, y_max);
+        this.drawTree(node.right, node.vector.x, x_max, y_min, y_max);
       }
 
     }
